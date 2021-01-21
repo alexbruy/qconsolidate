@@ -14,4 +14,5 @@ FORMS = ui/qconsolidatedialogbase.ui \
         ui/aboutdialogbase.ui \
         ui/directorywriterwidgetbase.ui
 
-TRANSLATIONS = i18n/qconsolidate_uk.ts
+TRANSLATIONS = i18n/qconsolidate_fr.ts \
+               i18n/qconsolidate_uk.ts

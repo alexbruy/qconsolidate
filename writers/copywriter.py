@@ -90,7 +90,7 @@ class CopyWriterTask(WriterTaskBase):
             if 'exportRemote' in self.settings and self.settings['exportRemote']:
                 exportLayer = True
         else:
-            QgsMessageLog.logMessage(self.tr('Layers from the "{provider}" provider are currently not supported.'.format(provider=providerType)), 'QConsolidate', Qgis.Info)
+            QgsMessageLog.logMessage(self.tr('Layers from the "{provider}" provider are currently not supported.').format(provider=providerType), 'QConsolidate', Qgis.Info)
 
         if exportLayer:
             filePath = os.path.join(newPath, self.safeName(layer.name()))
@@ -115,13 +115,13 @@ class CopyWriterTask(WriterTaskBase):
                     newSource = filePath.replace(self.baseDirectory, '.')
                     self.updateLayerSource(layer.id(), newSource, 'gdal')
         else:
-            QgsMessageLog.logMessage(self.tr('Layers from the "{provider}" provider are currently not supported.'.format(provider=providerType)), 'QConsolidate', Qgis.Info)
+            QgsMessageLog.logMessage(self.tr('Layers from the "{provider}" provider are currently not supported.').format(provider=providerType), 'QConsolidate', Qgis.Info)
 
     def consolidatePluginLayer(self, layer):
-        QgsMessageLog.logMessage(self.tr('Plugin layers are currently not supported.', 'QConsolidate', Qgis.Info))
+        QgsMessageLog.logMessage(self.tr('Plugin layers are currently not supported.'), 'QConsolidate', Qgis.Info)
 
     def consolidateMeshLayer(self, layer):
-        QgsMessageLog.logMessage(self.tr('Mesh layers are currently not supported.', 'QConsolidate', Qgis.Info))
+        QgsMessageLog.logMessage(self.tr('Mesh layers are currently not supported.'), 'QConsolidate', Qgis.Info)
 
     def _processGdalDatasource(self, layer, destDirectory):
         uri = layer.source()
@@ -136,13 +136,13 @@ class CopyWriterTask(WriterTaskBase):
                 layerPath = m.group(4)
                 newSource = '{vsi}{dirName}/{fileName}/{layer}'.format(vsi=prefix, dirName=newDirectory, fileName=os.path.split(filePath)[1], layer=layerPath)
             else:
-                QgsMessageLog.logMessage(self.tr('Failed to parse URI: "{uri}"'.format(uri=uri)), 'QConsolidate', Qgis.Warning)
+                QgsMessageLog.logMessage(self.tr('Failed to parse URI: "{uri}"').format(uri=uri), 'QConsolidate', Qgis.Warning)
                 return
         else:
             # ignore other virtual filesystems
             if uri.startswith('/vsi'):
                 prefix = uri.slit('/')[0]
-                QgsMessageLog.logMessage(self.tr('Not supported GDAL virtual filesystem layer "{layerType}"'.format(layerType=prefix)), 'QConsolidate', Qgis.Info)
+                QgsMessageLog.logMessage(self.tr('Not supported GDAL virtual filesystem layer "{layerType}"').format(layerType=prefix), 'QConsolidate', Qgis.Info)
                 return
 
             # handle multiple layers in the single dataset

@@ -102,7 +102,7 @@ class WriterTaskBase(QgsTask):
         total = 100.0 / len(layers)
 
         for count, layer in enumerate(layers.values()):
-            QgsMessageLog.logMessage('Consolidating {layer}.'.format(layer=layer.name()), 'QConsolidate', Qgis.Info)
+            QgsMessageLog.logMessage(self.tr('Consolidating {layer}.').format(layer=layer.name()), 'QConsolidate', Qgis.Info)
             if self.isCanceled():
                 break
 
@@ -178,7 +178,7 @@ class WriterTaskBase(QgsTask):
         success = True
         error, msg = QgsVectorFileWriter.writeAsVectorFormat(layer, destinationFile, options)
         if error != QgsVectorFileWriter.NoError:
-            QgsMessageLog.logMessage(self.tr('Failed to export layer "{layer}": {message}.'.format(layer=layer.name(), message=msg)), 'QConsolidate', Qgis.Warning)
+            QgsMessageLog.logMessage(self.tr('Failed to export layer "{layer}": {message}.').format(layer=layer.name(), message=msg), 'QConsolidate', Qgis.Warning)
             success = False
 
         return success, destinationFile
@@ -202,7 +202,7 @@ class WriterTaskBase(QgsTask):
 
         pipe = QgsRasterPipe()
         if not pipe.set(provider.clone()):
-            QgsMessageLog.logMessage(self.tr('Failed to export layer "{layer}": Cannot set pipe provider.'.format(layer=layer.name())), 'QConsolidate', Qgis.Warning)
+            QgsMessageLog.logMessage(self.tr('Failed to export layer "{layer}": Cannot set pipe provider.').format(layer=layer.name()), 'QConsolidate', Qgis.Warning)
             return False, None
 
         nodata = {}
@@ -216,7 +216,7 @@ class WriterTaskBase(QgsTask):
             nuller.setNoData(band, [value])
 
         if not pipe.insert(1, nuller):
-            QgsMessageLog.logMessage(self.tr('Failed to export layer "{layer}": Cannot set pipe nuller.'.format(layer=layer.name())), 'QConsolidate', Qgis.Warning)
+            QgsMessageLog.logMessage(self.tr('Failed to export layer "{layer}": Cannot set pipe nuller.').format(layer=layer.name()), 'QConsolidate', Qgis.Warning)
             return False, None
 
         writer = QgsRasterFileWriter(destinationFile)
@@ -228,7 +228,7 @@ class WriterTaskBase(QgsTask):
         success = True
         error = writer.writeRaster(pipe, cols, rows, provider.extent(), provider.crs())
         if error != QgsRasterFileWriter.NoError:
-            QgsMessageLog.logMessage(self.tr('Failed to export layer "{layer}": {message}.'.format(layer=layer.name(), message=error)), 'QConsolidate', Qgis.Warning)
+            QgsMessageLog.logMessage(self.tr('Failed to export layer "{layer}": {message}.').format(layer=layer.name(), message=error), 'QConsolidate', Qgis.Warning)
             success = False
 
         return success, destinationFile

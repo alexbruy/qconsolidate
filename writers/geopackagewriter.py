@@ -82,7 +82,7 @@ class GeopackageWriterTask(WriterTaskBase):
 
         ds = driver.CreateDataSource(self.filePath)
         if ds is None:
-            self.error = self.tr('Failed to create database: {message}'.format(gdal.GetLastErrorMsg()))
+            self.error = self.tr('Failed to create database: {message}').format(message=gdal.GetLastErrorMsg())
             return False
 
         ds = None
@@ -97,7 +97,7 @@ class GeopackageWriterTask(WriterTaskBase):
             if 'exportRemote' in self.settings and self.settings['exportRemote']:
                 exportLayer = True
         else:
-            QgsMessageLog.logMessage(self.tr('Layers from the "{provider}" provider are currently not supported.'.format(provider=providerType)), 'QConsolidate', Qgis.Info)
+            QgsMessageLog.logMessage(self.tr('Layers from the "{provider}" provider are currently not supported.').format(provider=providerType), 'QConsolidate', Qgis.Info)
 
         if exportLayer:
             ok, filePath = self.exportVectorLayer(layer, self.filePath, True)
@@ -115,7 +115,7 @@ class GeopackageWriterTask(WriterTaskBase):
             if 'exportRemote' in self.settings and self.settings['exportRemote']:
                 exportLayer = True
         else:
-            QgsMessageLog.logMessage(self.tr('Layers from the "{provider}" provider are currently not supported.'.format(provider=providerType)), 'QConsolidate', Qgis.Info)
+            QgsMessageLog.logMessage(self.tr('Layers from the "{provider}" provider are currently not supported.').format(provider=providerType), 'QConsolidate', Qgis.Info)
 
         if exportLayer:
             tableName = self.safeName(layer.name())
@@ -125,7 +125,7 @@ class GeopackageWriterTask(WriterTaskBase):
                 self.updateLayerSource(layer.id(), newSource, 'gdal')
 
     def consolidatePluginLayer(self, layer):
-        QgsMessageLog.logMessage(self.tr('Plugin layers are currently not supported.', 'QConsolidate', Qgis.Info))
+        QgsMessageLog.logMessage(self.tr('Plugin layers are currently not supported.'), 'QConsolidate', Qgis.Info)
 
     def consolidateMeshLayer(self, layer):
-        QgsMessageLog.logMessage(self.tr('Mesh layers are currently not supported.', 'QConsolidate', Qgis.Info))
+        QgsMessageLog.logMessage(self.tr('Mesh layers are currently not supported.'), 'QConsolidate', Qgis.Info)

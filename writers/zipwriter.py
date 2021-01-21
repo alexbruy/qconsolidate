@@ -85,7 +85,7 @@ class ZipWriterTask(WriterTaskBase):
 
     def cleanup(self):
         if not self.archive.zip(self.filePath):
-            QgsMessageLog.logMessage(self.tr('Failed to zip layers.', 'QConsolidate', Qgis.Warning))
+            QgsMessageLog.logMessage(self.tr('Failed to zip layers.'), 'QConsolidate', Qgis.Warning)
             return False
 
         shutil.rmtree(self.tempDir)
@@ -102,7 +102,7 @@ class ZipWriterTask(WriterTaskBase):
             if 'exportRemote' in self.settings and self.settings['exportRemote']:
                 exportLayer = True
         else:
-            QgsMessageLog.logMessage(self.tr('Layers from the "{provider}" provider are currently not supported.'.format(provider=providerType)), 'QConsolidate', Qgis.Info)
+            QgsMessageLog.logMessage(self.tr('Layers from the "{provider}" provider are currently not supported.').format(provider=providerType), 'QConsolidate', Qgis.Info)
 
         if exportLayer:
             layerName = self.safeName(layer.name())
@@ -125,7 +125,7 @@ class ZipWriterTask(WriterTaskBase):
             if 'exportRemote' in self.settings and self.settings['exportRemote']:
                 exportLayer = True
         else:
-            QgsMessageLog.logMessage(self.tr('Layers from the "{provider}" provider are currently not supported.'.format(provider=providerType)), 'QConsolidate', Qgis.Info)
+            QgsMessageLog.logMessage(self.tr('Layers from the "{provider}" provider are currently not supported.').format(provider=providerType), 'QConsolidate', Qgis.Info)
 
         if exportLayer:
             layerName = self.safeName(layer.name())
@@ -139,7 +139,7 @@ class ZipWriterTask(WriterTaskBase):
                     self.archive.addFile(filePath)
 
     def consolidatePluginLayer(self, layer):
-        QgsMessageLog.logMessage(self.tr('Plugin layers are currently not supported.', 'QConsolidate', Qgis.Info))
+        QgsMessageLog.logMessage(self.tr('Plugin layers are currently not supported.'), 'QConsolidate', Qgis.Info)
 
     def consolidateMeshLayer(self, layer):
-        QgsMessageLog.logMessage(self.tr('Mesh layers are currently not supported.', 'QConsolidate', Qgis.Info))
+        QgsMessageLog.logMessage(self.tr('Mesh layers are currently not supported.'), 'QConsolidate', Qgis.Info)

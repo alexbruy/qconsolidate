@@ -56,7 +56,7 @@ class QConsolidatePlugin:
         self.actionRun.setIcon(QIcon(os.path.join(pluginPath, 'icons', 'qconsolidate.svg')))
         self.actionRun.setObjectName('runQConsolidate')
 
-        self.actionAbout = QAction(self.tr('About QConsolidate…'), self.iface.mainWindow())
+        self.actionAbout = QAction(self.tr('About QConsolidate...'), self.iface.mainWindow())
         self.actionAbout.setIcon(QgsApplication.getThemeIcon('/mActionHelpContents.svg'))
         self.actionRun.setObjectName('aboutQConsolidate')
 
@@ -88,7 +88,7 @@ class QConsolidatePlugin:
         d.exec_()
 
     def tr(self, text):
-        return QCoreApplication.translate('QConsolidate', text)
+        return QCoreApplication.translate('QConsolidatePlugin', text)
 
     def completed(self):
         self.iface.messageBar().pushSuccess(self.tr('QConsolidate'), self.tr('Project consolidated successfully.'))

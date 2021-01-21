@@ -54,20 +54,20 @@ class AboutDialog(BASE, WIDGET):
         home = cfg['general']['homepage']
         bugs = cfg['general']['tracker']
 
-        self.setWindowTitle(self.tr('About {}'.format(name)))
+        self.setWindowTitle(self.tr('About {}').format(name))
         self.lblName.setText('<h1>{}</h1>'.format(name))
 
         self.lblLogo.setPixmap(QPixmap(os.path.join(pluginPath, *icon.split('/'))))
-        self.lblVersion.setText(self.tr('Version: {}'.format(version)))
+        self.lblVersion.setText(self.tr('Version: {}').format(version))
 
         self.textBrowser.setHtml(self.tr(
             '<p>{description}</p>'
             '<p><strong>Developers</strong>: {developer}</p>'
             '<p><strong>Homepage</strong>: <a href="{homepage}">{homepage}</a></p>'
-            '<p>Please report bugs at <a href="{bugtracker}">bugtracker</a>.</p>'.format(description=about,
-                                                                                         developer=author,
-                                                                                         homepage=self.home,
-                                                                                         bugtracker=bugs)))
+            '<p>Please report bugs at <a href="{bugtracker}">bugtracker</a>.</p>').format(description=about,
+                                                                                          developer=author,
+                                                                                          homepage=self.home,
+                                                                                          bugtracker=bugs))
 
         self.buttonBox.helpRequested.connect(self.openHelp)
 

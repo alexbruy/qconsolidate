@@ -44,6 +44,7 @@ from qgis.core import (Qgis,
                        QgsRasterFileWriter,
                        QgsRasterDataProvider,
                        QgsVectorFileWriter,
+                       QgsCoordinateTransformContext,
                       )
 
 RASTER_SIZE = 2000
@@ -226,7 +227,7 @@ class WriterTaskBase(QgsTask):
             writer.setCreateOptions(options)
 
         success = True
-        error = writer.writeRaster(pipe, cols, rows, provider.extent(), provider.crs())
+        error = writer.writeRaster(pipe, cols, rows, provider.extent(), provider.crs(), QgsCoordinateTransformContext())
         if error != QgsRasterFileWriter.NoError:
             QgsMessageLog.logMessage(self.tr('Failed to export layer "{layer}": {message}.'.format(layer=layer.name(), message=error)), 'QConsolidate', Qgis.Warning)
             success = False
